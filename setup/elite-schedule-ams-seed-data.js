@@ -5,7 +5,7 @@ var request       = require('request'),
     teamsData     = require('./data-teams.json'),
     locationsData = require('./data-locations.json');
 
-var url = 'https://elite-schedule-demo.azure-mobile.net/tables';
+var url = 'https://es-demo.azure-mobile.net/tables';
 
 uploadData(url + '/locations', locationsData).then(function(){
 	return uploadData(url + '/leagues', leagueData);
@@ -33,7 +33,7 @@ function uploadData(url, data) {
             url: url,
             headers: {
                 'Content-Type': 'application/json',
-                'X-ZUMO-APPLICATION': 'GSECUHNQOOrCwgRHFFYLXWiViGnXNV88'
+                'X-ZUMO-APPLICATION': 'VvnWUosPNRnNVMKtgsNBseFAuEKFLA64'
             },
             form: itemToAdd
         };

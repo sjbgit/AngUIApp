@@ -9,6 +9,29 @@
     eliteApi.$inject = ['$http', 'appSpinner'];
 
     function eliteApi($http, appSpinner) {
+
+        var leagueData =
+        [
+            {
+                "id": "038dfd06-0971-467d-80cb-2000cf3cf989",
+                "name": "Cager Classic",
+                "homeScreen": "**Welcome coaches, players, and parents!** \n\nThis site contains full schedule information for the tournament.",
+                "rulesScreen": ""
+            },
+            {
+                "id": "614b9998-e039-42da-8354-626b7b10a1cf",
+                "name": "Holiday Hoops Challenge",
+                "homeScreen": "**Welcome coaches, players, and parents!** \n\nThis site contains full schedule information for the tournament.",
+                "rulesScreen": ""
+            },
+            {
+                "id": "cabe8500-730c-4f99-b509-62c7a0401049",
+                "name": "Thanksgiving Tip Off",
+                "homeScreen": "**Welcome coaches, players, and parents!** \n\nThis site contains full schedule information for the tournament.",
+                "rulesScreen": ""
+            }
+        ];
+
         var service = {
             addLeague: addLeague,
             deleteGame: deleteGame,
@@ -67,7 +90,9 @@
         }
 
         function getLeagues() {
-            return httpGet('/leagues');
+
+            return leagueData;
+            //return httpGet('/leagues');
         }
 
         function getLocation(locationId) {
@@ -115,12 +140,28 @@
                 url: baseUrl + requestUrl,
                 method: method,
                 data: data,
-                headers: requestConfig.headers }).then(function(response){
+                headers: requestConfig.headers })
+
+                .success(function(response){
+                    appSpinner.hideSpinner();
+                    console.log('**response from EXECUTE', response);
+                    return response.data;
+                })
+                .error(function(response){
+                    appSpinner.hideSpinner();
+                    console.log('**response from EXECUTE', response);
+                    return leagueData; //response.data;
+                });
+
+
+                /*
+                .then(function(response){
 
                 appSpinner.hideSpinner();
                 console.log('**response from EXECUTE', response);
                 return response.data;
-            });
+                */
+            //});
         }
 
         function httpGet(url){

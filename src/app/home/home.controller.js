@@ -10,6 +10,8 @@
 
         vm.activate = activate;
 
+        vm.notesCollapsed = true;
+
         activate();
 
         ////////////////
