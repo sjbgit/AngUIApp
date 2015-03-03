@@ -5,22 +5,26 @@
     'use strict';
     var app = angular.module('eliteAdmin', [
         // Angular modules
-        'ngRoute',
+        //'ngRoute',
 
         // 3rd Party Modules
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'ui-router'
     ]);
 
-    app.config(['$routeProvider', configRoutes]);
+    //app.config(['$routeProvider', configRoutes]);
+    app.config(['$stateProvider', '$urlRouterProvider', configRoutes]);
 
-    function configRoutes($routeProvider) {
-        $routeProvider
-            .when('/', {
+    function configRoutes($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('home', {
+                url: '/',
                 templateUrl: 'app/home/home.html',
                 controller: 'HomeCtrl',
                 controllerAs: 'vm'
             })
-            .when('/leagues', {
+            .state('leagues', {
+                url: '/leagues',
                 templateUrl: 'app/leagues/leagues.html',
                 controller: 'LeaguesCtrl',
                 controllerAs: 'vm',
@@ -29,8 +33,9 @@
                         return eliteApi.getLeagues();
                     }]
                 }
-            })
-            .when('/leagues/:id/teams', {
+            });
+            /*
+            .state('/leagues/:id/teams', {
                 templateUrl: 'app/teams/teams.html',
                 controller: 'TeamsCtrl',
                 controllerAs: 'vm',
@@ -40,7 +45,7 @@
                     }]
                 }
             })
-            .when('/leagues/:id/games', {
+            .state('/leagues/:id/games', {
                 templateUrl: 'app/games/games.html',
                 controller: 'GamesCtrl',
                 controllerAs: 'vm',
@@ -50,7 +55,7 @@
                     }]
                 }
             })
-            .when('/leagues/:id/league-home', {
+            .state('/leagues/:id/league-home', {
                 templateUrl: 'app/league-home/league-home.html',
                 controller: 'LeagueHomeCtrl',
                 controllerAs: 'vm',
@@ -60,13 +65,15 @@
                     }]
                 }
             });
+        */
 
 
 
-        $routeProvider.otherwise('/');
+
+        $urlRouterProvider.otherwise('/');
     }
 
-    app.run(['$route', function ($route) {
+    app.run(['$state', function ($state) {
         // Include $route to kick start the router.
     }]);
 })();
