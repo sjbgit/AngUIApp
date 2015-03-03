@@ -9,8 +9,6 @@
 
         // 3rd Party Modules
         'ui.bootstrap'
-        //,
-        //'ui-router'
     ]);
 
     app.config(['$routeProvider', configRoutes]);
