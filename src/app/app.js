@@ -12,16 +12,20 @@
         'ui.router'
     ]);
 
-    app.config(['$routeProvider', configRoutes]);
+    //app.config(['$routeProvider', configRoutes]);
+    app.config(['$stateProvider', '$urlRouterProvider', configRoutes]);
 
-    function configRoutes($routeProvider) {
-        $routeProvider
-            .when('/', {
+
+    function configRoutes($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('home', {
+                url: '/',
                 templateUrl: 'app/home/home.html',
                 controller: 'HomeCtrl',
                 controllerAs: 'vm'
             })
-            .when('/leagues', {
+            .state('leagues', {
+                url: '/leagues',
                 templateUrl: 'app/leagues/leagues.html',
                 controller: 'LeaguesCtrl',
                 controllerAs: 'vm',
@@ -30,7 +34,8 @@
                         return eliteApi.getLeagues();
                     }]
                 }
-            })
+            });
+        /*
             .when('/leagues/:id/teams', {
                 templateUrl: 'app/teams/teams.html',
                 controller: 'TeamsCtrl',
@@ -62,12 +67,13 @@
                 }
             });
 
+        */
 
-
-        $routeProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/');
     }
 
-    app.run(['$route', function ($route) {
+    app.run(['$state', function ($state) {
         // Include $route to kick start the router.
     }]);
+
 })();
