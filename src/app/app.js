@@ -22,7 +22,11 @@
                 url: '/',
                 templateUrl: 'app/home/home.html',
                 controller: 'HomeCtrl',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                data: {
+                    property1: 'foo',
+                    property2: 'bar'
+                }
             })
             .state('leagues', {
                 url: '/leagues',
@@ -34,40 +38,43 @@
                         return eliteApi.getLeagues();
                     }]
                 }
-            });
-        /*
-            .when('/leagues/:id/teams', {
+            })
+
+            .state('league-teams', {
+                url: '/leagues/:id/teams',
                 templateUrl: 'app/teams/teams.html',
                 controller: 'TeamsCtrl',
                 controllerAs: 'vm',
                 resolve: {
-                    initialData: ['$route', 'eliteApi', function ($route, eliteApi) {
-                        return eliteApi.getTeams($route.current.params.id);
+                    initialData: ['$stateParams', 'eliteApi', function ($stateParams, eliteApi) {
+                        return eliteApi.getTeams($stateParams.id);
                     }]
                 }
             })
-            .when('/leagues/:id/games', {
+            .state('league-games', {
+                url: '/leagues/:id/games',
                 templateUrl: 'app/games/games.html',
                 controller: 'GamesCtrl',
                 controllerAs: 'vm',
                 resolve: {
-                    initialData: ['$route', 'gamesInitialDataService', function ($route, gamesInitialDataService) {
-                        return gamesInitialDataService.getData($route.current.params.id);
+                    initialData: ['$stateParams', 'gamesInitialDataService', function ($stateParams, gamesInitialDataService) {
+                        return gamesInitialDataService.getData($stateParams.id);
                     }]
                 }
             })
-            .when('/leagues/:id/league-home', {
+            .state('league-home', {
+                url: '/leagues/:id/league-home',
                 templateUrl: 'app/league-home/league-home.html',
                 controller: 'LeagueHomeCtrl',
                 controllerAs: 'vm',
                 resolve: {
-                    initialData: ['$route', 'eliteApi', function ($route, eliteApi) {
-                        return eliteApi.getLeague($route.current.params.id);
+                    initialData: ['$stateParams', 'eliteApi', function ($stateParams, eliteApi) {
+                        return eliteApi.getLeague($stateParams.id);
                     }]
                 }
             });
 
-        */
+
 
         $urlRouterProvider.otherwise('/');
     }

@@ -4,7 +4,7 @@
     angular.module('eliteAdmin').controller('HomeCtrl', HomeCtrl);
 
     /* @ngInject */
-    function HomeCtrl() {
+    function HomeCtrl($state) {
         /* jshint validthis: true */
         var vm = this;
 
@@ -17,6 +17,7 @@
         ////////////////
 
         function activate() {
+            console.log('current state data' + $state.current.data);
         }
 
 
