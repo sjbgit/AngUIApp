@@ -39,39 +39,62 @@
                     }]
                 }
             })
+            .state('league', {
+                url: '/leagues/:leagueId',
+                abstract: true,
+                controller: 'LeagueShellCtrl',
+                controllerAs: 'vm',
+                templateUrl: 'app/layout/league-shell.html'
+            })
 
-            .state('league-teams', {
-                url: '/leagues/:id/teams',
-                templateUrl: 'app/teams/teams.html',
-                controller: 'TeamsCtrl',
-                controllerAs: 'vm',
-                resolve: {
-                    initialData: ['$stateParams', 'eliteApi', function ($stateParams, eliteApi) {
-                        return eliteApi.getTeams($stateParams.id);
-                    }]
+            .state('league.teams', {
+                url: '/teams',
+                views: {
+                    'tabContent': {
+                        templateUrl: 'app/teams/teams.html',
+                        controller: 'TeamsCtrl',
+                        controllerAs: 'vm',
+                        resolve: {
+                            initialData: ['$stateParams', 'eliteApi', function ($stateParams, eliteApi) {
+                                return eliteApi.getTeams($stateParams.leagueId);
+                            }]
+                        }
+                    }
                 }
+
             })
-            .state('league-games', {
-                url: '/leagues/:id/games',
-                templateUrl: 'app/games/games.html',
-                controller: 'GamesCtrl',
-                controllerAs: 'vm',
-                resolve: {
-                    initialData: ['$stateParams', 'gamesInitialDataService', function ($stateParams, gamesInitialDataService) {
-                        return gamesInitialDataService.getData($stateParams.id);
-                    }]
+            .state('league.games', {
+                url: '/games',
+                views: {
+                    'tabContent': {
+                        templateUrl: 'app/games/games.html',
+                        controller: 'GamesCtrl',
+                        controllerAs: 'vm',
+                        resolve: {
+                            initialData: ['$stateParams', 'gamesInitialDataService', function ($stateParams, gamesInitialDataService) {
+                                return gamesInitialDataService.getData($stateParams.leagueId);
+                            }]
+                        }
+                    }
                 }
+
             })
-            .state('league-home', {
-                url: '/leagues/:id/league-home',
-                templateUrl: 'app/league-home/league-home.html',
-                controller: 'LeagueHomeCtrl',
-                controllerAs: 'vm',
-                resolve: {
-                    initialData: ['$stateParams', 'eliteApi', function ($stateParams, eliteApi) {
-                        return eliteApi.getLeague($stateParams.id);
-                    }]
+            .state('league.home', {
+                url: '/league-home',
+                views: {
+                    'tabContent': {
+                        templateUrl: 'app/league-home/league-home.html',
+                        controller: 'LeagueHomeCtrl',
+                        controllerAs: 'vm',
+                        resolve: {
+                            initialData: ['$stateParams', 'eliteApi', function ($stateParams, eliteApi) {
+                                return eliteApi.getLeague($stateParams.leagueId);
+                            }]
+                        }
+                    }
+
                 }
+
             });
 
 

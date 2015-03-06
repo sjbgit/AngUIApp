@@ -13,7 +13,7 @@
         vm.activate = activate;
         vm.deleteItem = deleteItem;
         vm.editItem = editItem;
-        vm.go = go;
+
         vm.teams = initialData;
         vm.toggleExpand = toggleExpand;
         vm.accordionExpanded = true;
@@ -64,10 +64,7 @@
             });
         }
 
-        function go(path){
-            //$location.path('leagues/' + $routeParams.id + '/' + path);
-            $state.go('league-games', { id: $stateParams.id });
-        }
+
 
         function initializeGroups() {
             vm.groups = _.chain(vm.teams)

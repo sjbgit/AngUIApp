@@ -11,7 +11,7 @@
         var vm = this;
 
         vm.activate = activate;
-        vm.go = go;
+
         vm.deleteItem = deleteItem;
         vm.editItem = editItem;
         vm.games = initialData.games;
@@ -72,8 +72,6 @@
             });
         }
 
-        function go(path){
-            $location.path('leagues/' + $routeParams.id + '/' + path);
-        }
+
     }
 })();
