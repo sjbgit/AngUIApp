@@ -59,6 +59,15 @@
                                 return eliteApi.getTeams($stateParams.leagueId);
                             }]
                         }
+                    },
+                    'view1': {
+                        template: '<div>This is view 1</div>'
+                    },
+                    'view2': {
+                        template: '<div>This is view 2</div>'
+                    },
+                    'view3': {
+                        template: '<div>This is view 3</div>'
                     }
                 }
 
@@ -102,7 +111,7 @@
         $urlRouterProvider.otherwise('/');
     }
 
-    app.run(['$state', function ($state) {
+    app.run(['$state', 'stateWatcherService', function ($state, stateWatcherService) {
         // Include $route to kick start the router.
     }]);
 
