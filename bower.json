@@ -10,7 +10,8 @@
     "lodash": "~2.4.1",
     "moment": "~2.8.3",
     "spin.js": "~2.0.1",
-    "angular-ui-router": "~0.2.13"
+    "angular-ui-router": "~0.2.13",
+    "angular-ui-calendar": "~0.8.1"
   },
   "devDependencies": {}
 }
